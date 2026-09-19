@@ -42,7 +42,6 @@ Use `python demo_all.py --live` to pass live mode to all three assignments. The 
 
 Set `OPENAI_API_KEY`, `OPENAI_API_BASE`, and optionally `MODEL` to use `llm_adapter.py` for an OpenAI-compatible completion. The default execution path is deterministic so reviewers can reproduce the transcripts without credentials. The adapter is deliberately isolated from the state machines; it does not change the required control-flow behavior.
 
-For the follow-up discussion, see [INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md). It explains the three graphs, failure and resume behavior, likely technical questions, and accurate answers.
 
 ## Assumptions
 
