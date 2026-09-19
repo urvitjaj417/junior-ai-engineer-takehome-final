@@ -1,0 +1,139 @@
+{
+  "first_run": {
+    "items": [
+      "item1",
+      "item2",
+      "item3",
+      "item4",
+      "item5"
+    ],
+    "completed": [
+      "item1",
+      "item2",
+      "item3"
+    ],
+    "results": {
+      "item1": "Summary of item1: Alpha service stores customer profiles.",
+      "item2": "Summary of item2: Beta service emits audit events.",
+      "item3": "Summary of item3: Gamma service retries transient requests."
+    },
+    "next_index": 3,
+    "stop_after": 3,
+    "paused": true,
+    "checked": false,
+    "resume": false,
+    "issues": [],
+    "llm_calls": 0,
+    "live": false,
+    "trace": [
+      {
+        "action": "process",
+        "item": "item1",
+        "result": "Summary of item1: Alpha service stores customer profiles."
+      },
+      {
+        "action": "process",
+        "item": "item2",
+        "result": "Summary of item2: Beta service emits audit events."
+      },
+      {
+        "action": "process",
+        "item": "item3",
+        "result": "Summary of item3: Gamma service retries transient requests."
+      },
+      {
+        "action": "pause",
+        "reason": "temporary stop requested after item3"
+      }
+    ],
+    "corrupt_item": "item4"
+  },
+  "second_run": {
+    "items": [
+      "item1",
+      "item2",
+      "item3",
+      "item4",
+      "item5"
+    ],
+    "completed": [
+      "item1",
+      "item2",
+      "item3",
+      "item4",
+      "item5"
+    ],
+    "results": {
+      "item1": "Summary of item1: Alpha service stores customer profiles.",
+      "item2": "Summary of item2: Beta service emits audit events.",
+      "item3": "Summary of item3: Gamma service retries transient requests.",
+      "item4": "",
+      "item5": "Summary of item5: Epsilon service exposes health checks."
+    },
+    "next_index": 5,
+    "stop_after": null,
+    "paused": false,
+    "checked": true,
+    "resume": false,
+    "issues": [
+      "item4 is empty."
+    ],
+    "llm_calls": 0,
+    "live": false,
+    "trace": [
+      {
+        "action": "process",
+        "item": "item1",
+        "result": "Summary of item1: Alpha service stores customer profiles."
+      },
+      {
+        "action": "process",
+        "item": "item2",
+        "result": "Summary of item2: Beta service emits audit events."
+      },
+      {
+        "action": "process",
+        "item": "item3",
+        "result": "Summary of item3: Gamma service retries transient requests."
+      },
+      {
+        "action": "pause",
+        "reason": "temporary stop requested after item3"
+      },
+      {
+        "action": "skip",
+        "item": "item1",
+        "reason": "already completed in checkpoint"
+      },
+      {
+        "action": "skip",
+        "item": "item2",
+        "reason": "already completed in checkpoint"
+      },
+      {
+        "action": "skip",
+        "item": "item3",
+        "reason": "already completed in checkpoint"
+      },
+      {
+        "action": "process",
+        "item": "item4",
+        "result": "<empty deliberately injected result>"
+      },
+      {
+        "action": "process",
+        "item": "item5",
+        "result": "Summary of item5: Epsilon service exposes health checks."
+      },
+      {
+        "action": "self-check",
+        "status": "issues found",
+        "issues": [
+          "item4 is empty."
+        ]
+      }
+    ],
+    "corrupt_item": "item4"
+  },
+  "database": "/home/ubuntu/junior-ai-engineer-takehome/assignment-3/resume_demo.sqlite"
+}

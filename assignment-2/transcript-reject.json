@@ -1,0 +1,32 @@
+{
+  "scenario": "reject",
+  "worker_output": "def average(values):\n    return sum(values) / len(values)",
+  "verdict": "rejected",
+  "reasons": [
+    "average([]) raised ZeroDivisionError, not ValueError."
+  ],
+  "total_llm_calls": 0,
+  "live": false,
+  "trace": [
+    {
+      "agent": "worker",
+      "decision": "produce one candidate",
+      "mode": "deterministic candidate",
+      "result": "def average(values):\n    return sum(values) / len(values)"
+    },
+    {
+      "agent": "reviewer",
+      "decision": "check once against concrete criteria",
+      "criteria": [
+        "function is named average",
+        "function accepts one argument",
+        "empty input raises ValueError",
+        "valid numeric input returns the arithmetic mean"
+      ],
+      "verdict": "rejected",
+      "reasons": [
+        "average([]) raised ZeroDivisionError, not ValueError."
+      ]
+    }
+  ]
+}

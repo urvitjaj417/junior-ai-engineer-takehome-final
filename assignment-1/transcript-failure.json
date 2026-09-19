@@ -1,0 +1,65 @@
+{
+  "question": "For a read-heavy API serving 10,000 requests per second, when should a team choose cache-aside over write-through caching, and what sizing trade-offs follow?",
+  "scenario": "failure",
+  "live": false,
+  "tool_calls": 5,
+  "planner_calls": 0,
+  "trace": [
+    {
+      "step": 1,
+      "decision": "use_tool",
+      "reason": "Exercise the failure path so the agent can demonstrate recovery.",
+      "action": "flaky_reference",
+      "result": "FAILED: mocked reference service timeout",
+      "status": "recovered",
+      "recovery": "Recorded the failure and marked this tool unavailable so planning can select an independent fallback."
+    },
+    {
+      "step": 2,
+      "decision": "use_tool",
+      "reason": "The previous tool failed; use an independent fallback rather than retrying the same tool.",
+      "action": "fallback_reference",
+      "result": "Independent fallback reference: cache-aside keeps the write path independent from cache availability; write-through gives a fresher cache after writes but couples writes to cache health.",
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "decision": "use_tool",
+      "reason": "The evidence gap is ['capacity', 'operations', 'semantics']; semantics covers ['semantics'].",
+      "action": "semantics",
+      "result": "Cache-aside loads on a miss and writes the cache after the backing store; the application controls invalidation. Write-through writes the cache and backing store together, which simplifies freshness but adds write latency.",
+      "status": "ok"
+    },
+    {
+      "step": 4,
+      "decision": "use_tool",
+      "reason": "The evidence gap is ['capacity', 'operations']; operations covers ['operations'].",
+      "action": "operations",
+      "result": "Cache-aside suits read-heavy workloads when occasional stale or cold reads are acceptable and invalidation can be owned by the application. Write-through is safer when reads must see recently written values, but every write pays cache-write latency and cache availability becomes part of the write path.",
+      "status": "ok"
+    },
+    {
+      "step": 5,
+      "decision": "use_tool",
+      "reason": "The evidence gap is ['capacity']; calculator covers ['capacity'].",
+      "action": "calculator",
+      "result": "At 10,000 requests/s and a 90% hit rate, expected backing-store reads are 1,000/s. If hit rate falls to 80%, origin load becomes 2,000/s.",
+      "status": "ok"
+    },
+    {
+      "step": 6,
+      "decision": "answer",
+      "reason": "No unused tool can cover the remaining evidence within the safety budget.",
+      "action": "done",
+      "result": "Evidence accepted; handing off to finalization."
+    },
+    {
+      "step": 7,
+      "decision": "finalize",
+      "reason": "The planner determined that the available evidence was sufficient or the safety budget required stopping.",
+      "action": "done",
+      "result": "Recommendation: choose cache-aside for this read-heavy API when the team can tolerate cold misses or brief staleness and can implement reliable invalidation. Choose write-through when freshness after writes is more important than write latency and the team accepts cache availability as part of the write path. The capacity estimate is At 10,000 requests/s and a 90% hit rate, expected backing-store reads are 1,000/s. If hit rate falls to 80%, origin load becomes 2,000/s.. The agent recovered from any tool failure by recording it and relying on the remaining independent evidence."
+    }
+  ],
+  "final_answer": "Recommendation: choose cache-aside for this read-heavy API when the team can tolerate cold misses or brief staleness and can implement reliable invalidation. Choose write-through when freshness after writes is more important than write latency and the team accepts cache availability as part of the write path. The capacity estimate is At 10,000 requests/s and a 90% hit rate, expected backing-store reads are 1,000/s. If hit rate falls to 80%, origin load becomes 2,000/s.. The agent recovered from any tool failure by recording it and relying on the remaining independent evidence."
+}
