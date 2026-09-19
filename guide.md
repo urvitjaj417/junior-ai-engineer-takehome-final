@@ -1,5 +1,9 @@
 # Submission Guide
 
+Public repository: https://github.com/urvitjaj417/junior-ai-engineer-takehome-final
+
+Submit the public repository URL above. No API key is required for the default demos or tests.
+
 ## Requirements
 
 Use Python 3.11 or newer. The default demos do not require an API key.

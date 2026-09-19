@@ -38,10 +38,11 @@ python demo_all.py
 
 Use `python demo_all.py --live` to pass live mode to all three assignments. The runner saves complete outputs to the ignored local file `demo-results.local.json` and prints a concise status line for each of the six required scenarios.
 
+This is the public submission repository. For the complete setup and execution instructions, see [guide.md](guide.md).
+
 ## LLM adapter
 
 Set `OPENAI_API_KEY`, `OPENAI_API_BASE`, and optionally `MODEL` to use `llm_adapter.py` for an OpenAI-compatible completion. The default execution path is deterministic so reviewers can reproduce the transcripts without credentials. The adapter is deliberately isolated from the state machines; it does not change the required control-flow behavior.
-
 
 ## Assumptions
 
